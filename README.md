@@ -1,2 +1,2 @@
 # QualityTrackerDemo
-This Folder contain Demo Data for Quakity Tracker App
+This Folder contains Demo Data for Quality Tracker App
