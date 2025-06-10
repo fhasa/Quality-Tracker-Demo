@@ -1,0 +1,237 @@
+name: Quality Tracker Test Execution
+
+on:
+  repository_dispatch:
+    types: [quality-tracker-test-run]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    env:
+      REQUIREMENT_ID: ${{ github.event.client_payload.requirementId }}
+      REQUIREMENT_NAME: ${{ github.event.client_payload.requirementName }}
+      TEST_CASE_IDS: ${{ join(github.event.client_payload.testCases, ' or ') }}
+      CALLBACK_URL: ${{ github.event.client_payload.callbackUrl }}
+      GITHUB_RUN_ID: ${{ github.run_id }}
+      REQUEST_ID: ${{ github.event.client_payload.requestId }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+            python -m pip install --upgrade pip
+            pip install pytest pytest-html
+            pip install selenium webdriver-manager  # Add webdriver-manager here
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+            
+      
+      - name: Display test cases to run
+        run: |
+          echo "Executing tests for requirement: $REQUIREMENT_ID - $REQUIREMENT_NAME"
+          echo "Test case IDs: $TEST_CASE_IDS"
+          echo "GitHub Run ID: $GITHUB_RUN_ID"
+          echo "Request ID: $REQUEST_ID"
+      
+      - name: Run tests
+        id: run_tests
+        run: |
+          # Run pytest with -k to select tests containing the test case IDs
+          python -m pytest -v -k "$TEST_CASE_IDS" --junit-xml=test-results.xml
+        continue-on-error: true  # Continue workflow even if tests fail
+      
+      - name: Generate test results JSON
+        run: |
+          cat > process_tests.py << 'EOF'
+          import json
+          import xml.etree.ElementTree as ET
+          import os
+          import time
+          import sys
+          
+          # Capture debug info first
+          debug_info = {
+              "github_run_id": os.environ.get("GITHUB_RUN_ID", ""),
+              "request_id": os.environ.get("REQUEST_ID", ""),
+              "requirement_id": os.environ.get("REQUIREMENT_ID", ""),
+              "requested_tests": os.environ.get("TEST_CASE_IDS", "").replace(" or ", ",").split(","),
+              "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+          }
+          
+          print(f"Debug Info: {json.dumps(debug_info, indent=2)}")
+          
+          # Parse JUnit XML result
+          test_results = []
+          try:
+              tree = ET.parse("test-results.xml")
+              root = tree.getroot()
+              
+              # Get test case IDs from environment variable - clean them up properly
+              raw_test_ids = os.environ.get("TEST_CASE_IDS", "").replace(" or ", ",").split(",")
+              test_ids = [tid.strip() for tid in raw_test_ids if tid.strip()]
+              
+              print(f"Processing test IDs: {test_ids}")
+              
+              # Extract test results
+              for testcase in root.findall(".//testcase"):
+                  name = testcase.get("name", "")
+                  classname = testcase.get("classname", "")
+                  
+                  # Improved test ID matching - be more flexible
+                  test_id = None
+                  for tid in test_ids:
+                      # Normalize both for comparison (remove TC- vs TC_)
+                      normalized_tid = tid.replace("-", "_").upper()
+                      normalized_name = name.replace("-", "_").upper()
+                      normalized_class = classname.replace("-", "_").upper()
+                      
+                      if (normalized_tid in normalized_name or 
+                          normalized_tid in normalized_class or
+                          normalized_name.endswith(normalized_tid) or
+                          normalized_class.endswith(normalized_tid)):
+                          test_id = tid  # Use the original ID format from the request
+                          break
+                  
+                  if not test_id:
+                      print(f"Could not match test case {name} (class: {classname}) to any requested test ID")
+                      continue
+                  
+                  # Determine status
+                  status = "Passed"
+                  error_msg = ""
+                  
+                  failure = testcase.find("failure")
+                  error = testcase.find("error")
+                  skipped = testcase.find("skipped")
+                  
+                  if failure is not None:
+                      status = "Failed"
+                      error_msg = failure.get("message", failure.text or "Test failed")[:200]  # Limit message length
+                  elif error is not None:
+                      status = "Failed"
+                      error_msg = error.get("message", error.text or "Test error")[:200]
+                  elif skipped is not None:
+                      status = "Not Run"
+                      error_msg = skipped.get("message", skipped.text or "Test skipped")[:200]
+                  
+                  # Calculate duration in milliseconds
+                  duration_ms = int(float(testcase.get("time", "0")) * 1000)
+                  
+                  result = {
+                      "id": test_id,
+                      "name": name,
+                      "status": status,
+                      "duration": duration_ms
+                  }
+                  
+                  # Add error message if there was a failure
+                  if error_msg:
+                      result["logs"] = error_msg
+                  
+                  test_results.append(result)
+                  print(f"Added result for {test_id}: {status} (duration: {duration_ms}ms)")
+              
+              # IMPORTANT: Add the originally requested tests as Not Run if they weren't found
+              found_ids = [r["id"] for r in test_results]
+              for tid in test_ids:
+                  if tid and tid not in found_ids:
+                      print(f"Adding Not Run status for missing test {tid}")
+                      test_results.append({
+                          "id": tid,
+                          "name": f"Test {tid}",
+                          "status": "Not Run",
+                          "duration": 0,
+                          "logs": f"Test {tid} was not found or not executed"
+                      })
+                      
+          except FileNotFoundError:
+              print("No test-results.xml file found - creating placeholder results")
+              # Get test case IDs from environment variable
+              raw_test_ids = os.environ.get("TEST_CASE_IDS", "").replace(" or ", ",").split(",")
+              test_ids = [tid.strip() for tid in raw_test_ids if tid.strip()]
+              
+              for tid in test_ids:
+                  if tid:
+                      test_results.append({
+                          "id": tid,
+                          "name": f"Test {tid}",
+                          "status": "Not Run",
+                          "duration": 0,
+                          "logs": "No test results file generated - tests may not have run"
+                      })
+          except Exception as e:
+              print(f"Error processing test results: {e}")
+              # Get test case IDs from environment variable
+              raw_test_ids = os.environ.get("TEST_CASE_IDS", "").replace(" or ", ",").split(",")
+              test_ids = [tid.strip() for tid in raw_test_ids if tid.strip()]
+              
+              for tid in test_ids:
+                  if tid:
+                      test_results.append({
+                          "id": tid,
+                          "name": f"Test {tid}",
+                          "status": "Failed",
+                          "duration": 0,
+                          "logs": f"Error processing test results: {str(e)}"
+                      })
+          
+          # Prepare result object with proper structure
+          result_obj = {
+              "requirementId": os.environ.get("REQUIREMENT_ID"),
+              "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+              "requestId": os.environ.get("REQUEST_ID"),
+              "runId": os.environ.get("GITHUB_RUN_ID"),
+              "results": test_results,
+              "debug": debug_info
+          }
+          
+          # Save to file - use run ID in filename
+          run_id = os.environ.get("GITHUB_RUN_ID", "unknown")
+          filename = f"results-{run_id}.json"
+          with open(filename, "w") as f:
+              json.dump(result_obj, f, indent=2)
+          
+          # Also save as results.json for backward compatibility
+          with open("results.json", "w") as f:
+              json.dump(result_obj, f, indent=2)
+              
+          print(f"Generated test results for {len(test_results)} test cases in {filename}")
+          print("Final results structure:")
+          print(json.dumps(result_obj, indent=2))
+          EOF
+          
+          # Run the Python script
+          python process_tests.py
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ github.run_id }}
+          path: |
+            results-${{ github.run_id }}.json
+            results.json
+          
+      - name: Send results back to Quality Tracker
+        if: env.CALLBACK_URL != ''
+        run: |
+          echo "Sending test results back to Quality Tracker..."
+          echo "Callback URL: $CALLBACK_URL"
+          echo "Results file content:"
+          cat results.json
+          echo ""
+          echo "Sending POST request..."
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "User-Agent: GitHub-Actions-Quality-Tracker" \
+            -d @results.json \
+            "$CALLBACK_URL" \
+            --max-time 30 \
+            --retry 3 \
+            --retry-delay 5 \
+            -v

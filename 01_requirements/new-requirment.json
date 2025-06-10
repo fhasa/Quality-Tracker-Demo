@@ -1,0 +1,47 @@
+[
+  {
+    "id": "REQ-001",
+    "name": "User Authentication",
+    "description": "Users should be able to log in to their account using valid credentials.",
+    "priority": "High",
+    "type": "Functional",
+    "businessImpact": 5,
+    "technicalComplexity": 3,
+    "regulatoryFactor": 3,
+    "usageFrequency": 4,
+    "versions": ["v1.0", "v1.1"],
+    "status": "Active",
+    "owner": "Authentication Team",
+    "tags": ["Authentication", "Account", "Security"]
+  },
+  {
+    "id": "REQ-002",
+    "name": "Dashboard Content and Display",
+    "description": "The homepage dashboard should display all essential e-commerce elements including top bar with currency switcher and account options, header with logo and navigation, main navigation categories, featured product cards with complete information, brand logos section, and footer.",
+    "priority": "High",
+    "type": "Functional",
+    "businessImpact": 5,
+    "technicalComplexity": 3,
+    "regulatoryFactor": 2,
+    "usageFrequency": 5,
+    "versions": ["v1.0"],
+    "status": "Active",
+    "owner": "Frontend Team",
+    "tags": ["Dashboard", "Homepage", "UI", "Display", "E-commerce"]
+  },
+  {
+    "id": "REQ-003",
+    "name": "Interactions with Dashboard Elements",
+    "description": "Users should be able to interact with all dashboard elements including navigation between categories, adding products to wishlist and cart, accessing cart summary, product comparison, currency switching, account navigation, and all clickable elements with proper redirection functionality.",
+    "priority": "High",
+    "type": "Functional",
+    "businessImpact": 5,
+    "technicalComplexity": 4,
+    "regulatoryFactor": 2,
+    "usageFrequency": 5,
+    "versions": ["v1.0"],
+    "status": "Active",
+    "owner": "Frontend Team",
+    "tags": ["Interactions", "Navigation","User Experience", "Functionality"]
+  }
+]

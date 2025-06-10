@@ -1,0 +1,1878 @@
+[
+  {
+    "id": "TC_001",
+    "name": "Verify user login with valid credentials",
+    "description": "Verify that a returning customer can successfully log in using valid credentials.",
+    "steps": [
+      "Navigate to the OpenCart login page.",
+      "Enter valid email address in the E-Mail Address field.",
+      "Enter valid password in the Password field.",
+      "Click on the Login button."
+    ],
+    "expectedResult": "User should be successfully logged in and redirected to the My Account page.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_user_login.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Login",
+      "Account"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_002",
+    "name": "Verify user login with invalid credentials",
+    "description": "Verify that a user cannot log in using invalid credentials and appropriate error message is displayed.",
+    "steps": [
+      "Navigate to the OpenCart login page.",
+      "Enter invalid email address in the E-Mail Address field.",
+      "Enter invalid password in the Password field.",
+      "Click on the Login button."
+    ],
+    "expectedResult": "User should not be logged in and an appropriate error message should be displayed.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_user_login_invalid.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Login",
+      "Negative Testing"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_003",
+    "name": "Login and Continue from Last Activity",
+    "description": "Verify that after a user logs in, logs out, and clicks the Continue button, they are redirected back to the homepage.",
+    "steps": [
+      "Clear browser cache and navigate to the OpenCart homepage.",
+      "Click on the My Account dropdown and select the Login option.",
+      "Enter valid email and password, then click the Login button.",
+      "Verify that the user's account dashboard is successfully loaded.",
+      "Click on the My Account dropdown again and select Logout.",
+      "Verify that the logout success page appears with a Continue button.",
+      "Click the Continue button.",
+      "Verify that the user is redirected back to the homepage."
+    ],
+    "expectedResult": "User should be redirected to the homepage after clicking the Continue button on the logout success page.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_login_logout_continue.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Login",
+      "Logout",
+      "Navigation",
+      "User Flow"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_004",
+    "name": "Verify 'Forgotten Password' functionality",
+    "description": "Verify that a user can access and use the 'Forgotten Password' functionality.",
+    "steps": [
+      "Navigate to the OpenCart login page.",
+      "Click on the 'Forgotten Password' link below the password field.",
+      "Enter registered email address in the E-Mail Address field.",
+      "Click on the Continue button."
+    ],
+    "expectedResult": "Password reset email should be sent to the registered email address and a confirmation message should be displayed.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_forgotten_password.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Password Reset",
+      "Account"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_005",
+    "name": "Verify new customer registration flow",
+    "description": "Verify that a new customer can successfully register by completing the registration form.",
+    "steps": [
+      "Navigate to the OpenCart login page.",
+      "Click on Continue button in the New Customer section.",
+      "Enter First Name, Last Name, E-Mail, and Password in the registration form.",
+      "Toggle the Newsletter subscription switch (optional).",
+      "Check the 'I have read and agree to the Privacy Policy' checkbox.",
+      "Click on the Continue button."
+    ],
+    "expectedResult": "User account should be created successfully and user should be redirected to account creation success page.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_user_registration.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Registration",
+      "Account"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_006",
+    "name": "Verify registration with existing email",
+    "description": "Verify that system prevents registration with an already existing email address.",
+    "steps": [
+      "Navigate to the OpenCart registration page.",
+      "Enter an email address that is already registered in the E-Mail field.",
+      "Complete all other required fields (First Name, Last Name, Password).",
+      "Check the Privacy Policy agreement checkbox.",
+      "Click on the Continue button."
+    ],
+    "expectedResult": "Registration should be blocked and appropriate error message about duplicate email should be displayed.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_user_registration_duplicate_email.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Registration",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_007",
+    "name": "Verify registration without agreeing to Privacy Policy",
+    "description": "Verify that system prevents registration when Privacy Policy checkbox is not checked.",
+    "steps": [
+      "Navigate to the OpenCart registration page.",
+      "Enter valid data for all required fields (First Name, Last Name, E-Mail, Password).",
+      "Do NOT check the 'I have read and agree to the Privacy Policy' checkbox.",
+      "Click on the Continue button."
+    ],
+    "expectedResult": "Registration should not proceed and an appropriate error message about Privacy Policy agreement should be displayed.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_privacy_policy_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Registration",
+      "Privacy Policy",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_008",
+    "name": "Verify registration with missing required fields",
+    "description": "Verify that system validates required fields during registration.",
+    "steps": [
+      "Navigate to the OpenCart registration page.",
+      "Leave one or more required fields empty (First Name, Last Name, E-Mail, Password).",
+      "Check the Privacy Policy agreement checkbox.",
+      "Click on the Continue button."
+    ],
+    "expectedResult": "Registration should not proceed and appropriate error messages should be displayed for each missing required field.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_required_fields_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-001"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Authentication",
+      "Registration",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_009",
+    "name": "Verify adding product to shopping cart",
+    "description": "Verify that a user can add a product to the shopping cart from a product page.",
+    "steps": [
+      "Navigate to any product page.",
+      "Select any required options (if applicable).",
+      "Enter quantity (or use default).",
+      "Click on the 'Add to Cart' button.",
+      "Verify the cart notification is displayed."
+    ],
+    "expectedResult": "Product should be added to the shopping cart and the header cart should update to show items count and total amount (e.g., '4 item(s) - $489.20').",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_cart.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Shopping Cart",
+      "Product",
+      "Purchase"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_010",
+    "name": "Verify shopping cart header display",
+    "description": "Verify that the shopping cart in the header displays correct information.",
+    "steps": [
+      "Add multiple products to the shopping cart with different quantities.",
+      "Navigate to any page with the shopping cart icon visible in the header.",
+      "Observe the shopping cart display showing the number of items and total amount."
+    ],
+    "expectedResult": "Shopping cart in header should display correct number of items and total amount (e.g., '4 item(s) - $489.20').",
+    "status": "Not Run",
+    "automationStatus": "Manual",
+    "automationPath": "tests/TestOpenCart/test_cart_header_display.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Shopping Cart",
+      "UI",
+      "Header"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_011",
+    "name": "Verify shopping cart page access",
+    "description": "Verify that a user can access the shopping cart page through the header link.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Click on the shopping cart icon or text in the header."
+    ],
+    "expectedResult": "User should be redirected to the shopping cart page displaying all added items with product details, quantities, prices, and weight information ('Shopping Cart (12.15kg)').",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_cart_page_access.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Shopping Cart",
+      "Navigation",
+      "UI"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_012",
+    "name": "Verify removing product from shopping cart",
+    "description": "Verify that a user can remove a product from the shopping cart.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the shopping cart page.",
+      "Click on the remove (red X) button for a specific product."
+    ],
+    "expectedResult": "Product should be removed from the shopping cart and cart totals, subtotals, and tax amounts should be updated accordingly.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_remove_from_cart.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Shopping Cart",
+      "Product",
+      "Remove"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_013",
+    "name": "Verify updating product quantity in shopping cart",
+    "description": "Verify that a user can update the quantity of a product in the shopping cart.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the shopping cart page.",
+      "Change the quantity of a product in the quantity field.",
+      "Click on the blue refresh button next to the quantity field."
+    ],
+    "expectedResult": "Product quantity should be updated and cart totals (Sub-Total, Eco Tax, VAT, and Total) should reflect the changes.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_update_cart_quantity.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Shopping Cart",
+      "Product",
+      "Quantity",
+      "Update"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_014",
+    "name": "Verify reward points display in shopping cart",
+    "description": "Verify that reward points associated with products are displayed correctly in the shopping cart.",
+    "steps": [
+      "Add products that offer reward points to the shopping cart (e.g., HTC Touch HD with 400 points).",
+      "Navigate to the shopping cart page.",
+      "Observe the reward points display for qualifying products."
+    ],
+    "expectedResult": "Reward points should be displayed correctly for each qualifying product (e.g., '- Reward Points: 400').",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_reward_points_display.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Shopping Cart",
+      "Reward Points",
+      "Display"
+    ],
+    "priority": "Low",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_015",
+    "name": "Verify credit card payment form display",
+    "description": "Verify that the payment page displays all required credit card payment form fields.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Complete any required pre-payment steps (shipping address, shipping method, etc.).",
+      "Navigate to the payment method selection step.",
+      "Select credit card payment option."
+    ],
+    "expectedResult": "Credit card payment form should be displayed with the following fields: Card Number, Expiry Date (MM/YY), CVC/CVV, Cardholder Name. Payment card icons (Visa, Mastercard, etc.) should be visible.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_credit_card_form_display.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-003"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Credit Card",
+      "Form",
+      "UI"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_016",
+    "name": "Verify billing address form in payment section",
+    "description": "Verify that the payment page displays the billing address form fields.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Navigate to the payment method step.",
+      "Locate the billing address section."
+    ],
+    "expectedResult": "Billing address form should be displayed with fields for Country, Address Line 1, Address Line 2, City, and any other required address fields.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_billing_address_form.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-003"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Billing Address",
+      "Form",
+      "UI"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_017",
+    "name": "Verify payment method selection options",
+    "description": "Verify that users can select from multiple payment methods when available.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Navigate to the payment method selection step.",
+      "Observe available payment methods."
+    ],
+    "expectedResult": "Multiple payment methods should be displayed when available (e.g., Credit Card, PayPal, Bank Transfer), with radio buttons or similar selection mechanism.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_payment_method_options.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-003"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Payment Methods",
+      "Options",
+      "UI"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_031",
+    "name": "Verify successful payment with valid credit card",
+    "description": "Verify that payment is processed successfully with valid credit card details.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Complete shipping information (if required).",
+      "Select credit card payment method.",
+      "Enter valid credit card details (number, expiry, CVC, name).",
+      "Enter valid billing address.",
+      "Agree to terms and conditions (if required).",
+      "Click on the Confirm Order or similar button."
+    ],
+    "expectedResult": "Payment should be processed successfully and user should be redirected to order confirmation page with success message and order details.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_successful_credit_card_payment.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-003"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Credit Card",
+      "Success",
+      "Order"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_035",
+    "name": "Verify cardholder name validation",
+    "description": "Verify that the system validates cardholder names and rejects empty or invalid formats.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Select credit card payment method.",
+      "Leave the cardholder name field empty or enter an invalid format (e.g., numbers only).",
+      "Complete other required fields correctly.",
+      "Attempt to confirm the order."
+    ],
+    "expectedResult": "System should validate the cardholder name and display an appropriate error message without processing the payment.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_cardholder_name_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Credit Card",
+      "Cardholder Name",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_036",
+    "name": "Verify billing address validation",
+    "description": "Verify that the system validates billing address fields and rejects incomplete information.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Select credit card payment method.",
+      "Leave one or more required billing address fields empty or enter invalid formats.",
+      "Complete payment card details correctly.",
+      "Attempt to confirm the order."
+    ],
+    "expectedResult": "System should validate the billing address and display appropriate error messages for missing or invalid fields without processing the payment.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_billing_address_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Billing Address",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_037",
+    "name": "Verify terms and conditions agreement requirement",
+    "description": "Verify that users must agree to terms and conditions before completing payment.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Select payment method.",
+      "Enter all required payment and billing information correctly.",
+      "Do NOT check the terms and conditions agreement checkbox.",
+      "Attempt to confirm the order."
+    ],
+    "expectedResult": "System should require terms and conditions agreement and display an appropriate error message without processing the payment.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_terms_agreement_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Terms and Conditions",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_038",
+    "name": "Verify order summary display on payment page",
+    "description": "Verify that the payment page displays an accurate order summary.",
+    "steps": [
+      "Add multiple products to the shopping cart.",
+      "Proceed to checkout.",
+      "Navigate to the payment method step.",
+      "Observe the order summary section."
+    ],
+    "expectedResult": "Order summary should display all products, quantities, prices, and total amount to be charged, matching the shopping cart contents.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_payment_order_summary.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Order Summary",
+      "UI"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_039",
+    "name": "Verify payment error handling for declined transactions",
+    "description": "Verify that the system handles declined transactions appropriately.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Select credit card payment method.",
+      "Enter valid-format credit card details that will trigger a declined transaction.",
+      "Complete all other required fields.",
+      "Attempt to confirm the order."
+    ],
+    "expectedResult": "System should display an appropriate error message indicating the transaction was declined without creating an order.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_declined_transaction.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Error Handling",
+      "Declined Transaction",
+      "Negative Testing"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_040",
+    "name": "Verify alternative payment method - PayPal",
+    "description": "Verify that users can pay using PayPal as an alternative payment method.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Select PayPal as the payment method.",
+      "Click on the button to proceed with PayPal payment."
+    ],
+    "expectedResult": "User should be redirected to PayPal authentication page to complete the payment.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_paypal_payment.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "PayPal",
+      "Alternative Method"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_041",
+    "name": "Verify alternative payment method - Bank Transfer",
+    "description": "Verify that users can select bank transfer as an alternative payment method.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Proceed to checkout.",
+      "Select Bank Transfer as the payment method.",
+      "Complete any required information.",
+      "Confirm the order."
+    ],
+    "expectedResult": "Order should be created with 'Pending' or similar status, and bank transfer instructions should be displayed to the user.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_bank_transfer_payment.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Bank Transfer",
+      "Alternative Method"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_042",
+    "name": "Verify payment confirmation email",
+    "description": "Verify that a payment confirmation email is sent after successful payment.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Complete checkout with successful payment.",
+      "Check email inbox for confirmation."
+    ],
+    "expectedResult": "Payment confirmation email should be received containing order details, payment information, and next steps.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_payment_confirmation_email.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Payment",
+      "Email",
+      "Confirmation"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_043",
+    "name": "Verify payment information security",
+    "description": "Verify that payment information is transmitted securely.",
+    "steps": [
+      "Navigate to the checkout page.",
+      "Verify the page uses HTTPS protocol.",
+      "Inspect the page source and network requests during payment processing."
+    ],
+    "expectedResult": "Payment page should use secure HTTPS protocol, payment form should prevent autocomplete of sensitive fields, and payment data should be transmitted securely.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_payment_security.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Manual",
+    "tags": [
+      "Payment",
+      "Security",
+      "HTTPS"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_044",
+    "name": "Verify basic keyword search functionality",
+    "description": "Verify that users can search for products using keywords in the search box.",
+    "steps": [
+      "Navigate to any page with the search box visible in the header.",
+      "Enter a valid product keyword in the search box (e.g., 'iPhone').",
+      "Click on the search icon or press Enter."
+    ],
+    "expectedResult": "Search results page should display matching products with the search term, or appropriate 'no results' message if no products match.",
+    "status": "Not Run",
+    "automationStatus": "Manual",
+    "automationPath": "tests/TestOpenCart/test_basic_keyword_search.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-004"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Search",
+      "Keywords",
+      "Product"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_045",
+    "name": "Verify category-filtered search",
+    "description": "Verify that users can filter search results by product category.",
+    "steps": [
+      "Navigate to the search page.",
+      "Enter a search term in the Keywords field.",
+      "Click on the category dropdown and select a specific category (not 'All Categories').",
+      "Click on the Search button."
+    ],
+    "expectedResult": "Search results should only display products from the selected category that match the search term.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_category_filtered_search.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-004"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Search",
+      "Categories",
+      "Filter"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_046",
+    "name": "Verify search in product descriptions",
+    "description": "Verify that the 'Search in product descriptions' checkbox extends the search to product descriptions.",
+    "steps": [
+      "Navigate to the search page.",
+      "Enter a term that appears in product descriptions but not in product names.",
+      "Check the 'Search in product descriptions' checkbox.",
+      "Click on the Search button.",
+      "Note the results.",
+      "Uncheck the 'Search in product descriptions' checkbox.",
+      "Click on the Search button again.",
+      "Compare the results."
+    ],
+    "expectedResult": "More results should be displayed when the 'Search in product descriptions' checkbox is checked compared to when it is unchecked.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_search_in_descriptions.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-004"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Search",
+      "Product Descriptions",
+      "Advanced Search"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_047",
+    "name": "Verify 'no results' message for non-matching search",
+    "description": "Verify that an appropriate message is displayed when no products match the search criteria.",
+    "steps": [
+      "Navigate to the search page.",
+      "Enter a search term that will not match any products (e.g., a random string like 'xyzabc123').",
+      "Click on the Search button."
+    ],
+    "expectedResult": "Search results page should display the message 'There is no product that matches the search criteria.' when no products match.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_no_results_message.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-004"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Search",
+      "No Results",
+      "Error Message"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_048",
+    "name": "Verify checkout options (guest or registered)",
+    "description": "Verify that users can choose between registering an account and checking out as a guest.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the checkout page.",
+      "Observe the 'Register Account' and 'Guest Checkout' radio button options.",
+      "Select 'Register Account' option.",
+      "Enter required personal details.",
+      "Click Continue.",
+      "Complete the checkout process.",
+      "Start a new checkout session.",
+      "Select 'Guest Checkout' option.",
+      "Enter required personal details.",
+      "Click Continue.",
+      "Complete the checkout process."
+    ],
+    "expectedResult": "Both checkout options should work correctly: Register Account should create a new account and complete the order; Guest Checkout should complete the order without account creation.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_checkout_options.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Guest Checkout",
+      "Registration"
+    ],
+    "priority": "High",
+    "estimatedDuration": 3
+  },
+  {
+    "id": "TC_049",
+    "name": "Verify shipping address form validation",
+    "description": "Verify that the shipping address form validates required fields during checkout.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the checkout page.",
+      "Select checkout option (guest or register).",
+      "Enter personal details.",
+      "Leave one or more required shipping address fields empty (First Name, Last Name, Address 1, City, Post Code, Country, Region/State).",
+      "Click Continue."
+    ],
+    "expectedResult": "Form should not submit and appropriate error messages should be displayed for each missing required field.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_shipping_address_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Shipping Address",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_050",
+    "name": "Verify shipping method selection",
+    "description": "Verify that users can select a shipping method during checkout.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the checkout page.",
+      "Complete personal details and shipping address.",
+      "Navigate to shipping method selection.",
+      "Observe available shipping methods.",
+      "Select a shipping method.",
+      "Click Continue."
+    ],
+    "expectedResult": "User should be able to select a shipping method and proceed to the next checkout step.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_shipping_method_selection.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Shipping Method",
+      "Selection"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_051",
+    "name": "Verify payment method selection",
+    "description": "Verify that users can select a payment method during checkout.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the checkout page.",
+      "Complete personal details, shipping address, and shipping method.",
+      "Navigate to payment method selection.",
+      "Click the 'Choose payment method' button.",
+      "Select a payment method from the available options.",
+      "Click Choose to confirm."
+    ],
+    "expectedResult": "User should be able to select a payment method and proceed to the next checkout step.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_payment_method_selection_checkout.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Payment Method",
+      "Selection"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_052",
+    "name": "Verify order review and confirmation",
+    "description": "Verify that users can review their order details and confirm the order.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Complete checkout process including personal details, shipping address, shipping method, and payment method.",
+      "Review the order summary showing product details, quantities, prices, and total.",
+      "Verify agreement options (newsletter subscription, privacy policy).",
+      "Check the 'I have read and agree to the Privacy Policy' checkbox.",
+      "Click on the 'Confirm Order' button."
+    ],
+    "expectedResult": "Order should be successfully placed, and user should be redirected to a confirmation page with order details and confirmation message.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_order_confirmation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Order Confirmation",
+      "Review"
+    ],
+    "priority": "High",
+    "estimatedDuration": 3
+  },
+  {
+    "id": "TC_053",
+    "name": "Verify order comments functionality",
+    "description": "Verify that users can add comments to their order during checkout.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the checkout page.",
+      "Complete personal details, shipping address, shipping method, and payment method.",
+      "Enter text in the 'Add Comments About Your Order' text area.",
+      "Complete the checkout process."
+    ],
+    "expectedResult": "Order comments should be saved with the order and visible in the order confirmation/details.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_order_comments.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Order Comments",
+      "Additional Information"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_054",
+    "name": "Verify order total calculation in checkout",
+    "description": "Verify that the order total is calculated correctly in the checkout, including sub-total, taxes, and shipping.",
+    "steps": [
+      "Add multiple products to the shopping cart.",
+      "Navigate to the checkout page.",
+      "Complete personal details, shipping address, and select a shipping method with a known cost.",
+      "Observe the order summary section.",
+      "Verify the Sub-Total (sum of product prices).",
+      "Verify the Eco Tax calculation.",
+      "Verify the VAT calculation.",
+      "Verify the final Total."
+    ],
+    "expectedResult": "All calculations should be correct: Sub-Total should match the cart; Eco Tax and VAT should be calculated based on the correct rates; Total should be Sub-Total + Eco Tax + VAT + Shipping (if applicable).",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_checkout_total_calculation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Calculation",
+      "Order Total",
+      "Tax"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_055",
+    "name": "Verify checkout with existing account login",
+    "description": "Verify that returning customers can log in during checkout.",
+    "steps": [
+      "Add products to the shopping cart.",
+      "Navigate to the checkout page.",
+      "Note the 'If you already have an account with us, please login at the login page' message.",
+      "Click on the 'login page' link.",
+      "Log in with valid credentials.",
+      "Complete the checkout process with pre-filled account information."
+    ],
+    "expectedResult": "User should be able to log in during checkout, and their account information (name, email, addresses) should be pre-filled in the checkout form.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_checkout_existing_account.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Checkout",
+      "Login",
+      "Existing Account"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_056",
+    "name": "Verify top menu category navigation",
+    "description": "Verify that users can navigate product categories through the top menu.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "Observe the category menu in the top navigation bar (Desktops, Laptops & Notebooks, Components, Tablets, Software, Phones & PDAs, Cameras, MP3 Players).",
+      "Click on any category (e.g., 'Laptops & Notebooks')."
+    ],
+    "expectedResult": "User should be directed to the category page showing all products in that category.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_top_menu_navigation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-006"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Categories",
+      "Navigation",
+      "Top Menu"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_057",
+    "name": "Verify subcategory navigation",
+    "description": "Verify that users can navigate to product subcategories through dropdown menus.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "Hover over a category in the top menu that has subcategories (e.g., 'Desktops').",
+      "Observe the dropdown menu with subcategories.",
+      "Click on a subcategory (e.g., 'Mac', 'PC')."
+    ],
+    "expectedResult": "User should be directed to the subcategory page showing only products in that specific subcategory.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_subcategory_navigation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-006"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Categories",
+      "Subcategories",
+      "Navigation",
+      "Dropdown"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_064",
+    "name": "Verify featured products display on homepage",
+    "description": "Verify that featured products are displayed correctly on the homepage.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "Observe the 'Featured' section.",
+      "Verify multiple featured products are displayed with product images."
+    ],
+    "expectedResult": "Featured products should be displayed in a grid layout with clear product images, names, and prices.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_featured_products_display.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-007"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Featured",
+      "Products",
+      "Homepage",
+      "UI"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_065",
+    "name": "Verify featured product information",
+    "description": "Verify that each featured product displays correct and complete information.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "Observe the 'Featured' section.",
+      "Check each featured product for complete information (name, image, price, description snippet).",
+      "Verify if discounted prices are displayed correctly (original price crossed out, discount price highlighted)."
+    ],
+    "expectedResult": "Each featured product should display its name, image, price (with discounts clearly indicated when applicable), and a brief description.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_featured_product_information.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-007"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Featured",
+      "Products",
+      "Information",
+      "Pricing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_066",
+    "name": "Verify featured product navigation",
+    "description": "Verify that users can navigate to the full product page from featured products.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "In the 'Featured' section, click on a product name or image.",
+      "Verify redirection to the product's detail page."
+    ],
+    "expectedResult": "Clicking on a featured product's name or image should navigate to that product's detail page with complete information.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_featured_product_navigation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-007"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Featured",
+      "Products",
+      "Navigation"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_067",
+    "name": "Verify featured product action buttons",
+    "description": "Verify that action buttons for featured products function correctly.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "For a featured product, click the 'Add to Cart' button (cart icon).",
+      "Verify product is added to cart.",
+      "For a featured product, click the 'Add to Wish List' button (heart icon).",
+      "Verify product is added to wish list.",
+      "For a featured product, click the 'Compare' button (compare icon).",
+      "Verify product is added to comparison."
+    ],
+    "expectedResult": "All action buttons (Add to Cart, Add to Wish List, Compare) should function correctly for featured products with appropriate confirmations.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_featured_product_actions.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-007",
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Featured",
+      "Products",
+      "Actions",
+      "Add to Cart",
+      "Wish List",
+      "Compare"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_068",
+    "name": "Verify 'Add to Cart' button on product listings",
+    "description": "Verify that the 'Add to Cart' button is displayed and functional on product listing pages.",
+    "steps": [
+      "Navigate to the homepage or any category page with product listings.",
+      "Locate a product with an 'Add to Cart' button (e.g., MacBook in the featured products section).",
+      "Click on the 'Add to Cart' button for the product."
+    ],
+    "expectedResult": "Product should be added to the shopping cart, a success message should be displayed, and the cart total in the header should update to reflect the addition.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_cart_from_listing.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008",
+      "REQ-002"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Product Listing",
+      "Shopping Cart"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_069",
+    "name": "Verify 'Add to Cart' button on product detail page",
+    "description": "Verify that the 'Add to Cart' button is displayed and functional on product detail pages.",
+    "steps": [
+      "Navigate to any product detail page.",
+      "Locate the 'Add to Cart' button on the page.",
+      "Enter a quantity if applicable.",
+      "Select any required product options if applicable.",
+      "Click on the 'Add to Cart' button."
+    ],
+    "expectedResult": "Product should be added to the shopping cart with the selected quantity and options, a success message should be displayed, and the cart total in the header should update.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_cart_from_detail.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Product Detail",
+      "Shopping Cart"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_070",
+    "name": "Verify adding product with options to cart",
+    "description": "Verify that products with required options cannot be added to the cart without selecting those options.",
+    "steps": [
+      "Navigate to a product detail page for a product that has required options (e.g., size, color).",
+      "Attempt to click on the 'Add to Cart' button without selecting the required options."
+    ],
+    "expectedResult": "System should prevent adding the product to the cart and display an error message indicating that options must be selected.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_cart_with_options.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Product Options",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_071",
+    "name": "Verify quantity validation when adding to cart",
+    "description": "Verify that the system validates product quantities when adding to cart.",
+    "steps": [
+      "Navigate to any product detail page.",
+      "Set an invalid quantity (e.g., 0, a negative number, or a very large number).",
+      "Click on the 'Add to Cart' button."
+    ],
+    "expectedResult": "System should validate the quantity and display an appropriate error message without adding the product to the cart.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_cart_quantity_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Quantity",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_072",
+    "name": "Verify stock validation when adding to cart",
+    "description": "Verify that the system validates stock availability when adding products to the cart.",
+    "steps": [
+      "Navigate to a product detail page for a product with limited stock.",
+      "Enter a quantity greater than the available stock.",
+      "Click on the 'Add to Cart' button."
+    ],
+    "expectedResult": "System should validate the stock availability and either adjust the quantity or display an appropriate error message about exceeding available stock.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_cart_stock_validation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Stock",
+      "Validation",
+      "Negative Testing"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_073",
+    "name": "Verify success message after adding to cart",
+    "description": "Verify that an appropriate success message is displayed after adding a product to the cart.",
+    "steps": [
+      "Navigate to any product listing or detail page.",
+      "Click on the 'Add to Cart' button for a product.",
+      "Observe the success message."
+    ],
+    "expectedResult": "A success message should be displayed, indicating that the product has been added to the cart, with options to continue shopping or go to the cart page.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_cart_success_message.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Success Message",
+      "UI"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_074",
+    "name": "Verify cart total update after adding product",
+    "description": "Verify that the cart total in the header updates correctly after adding a product to the cart.",
+    "steps": [
+      "Note the current cart total in the header (e.g., '0 item(s) - $0.00').",
+      "Add a product to the cart (e.g., MacBook for $602.00).",
+      "Observe the updated cart total in the header."
+    ],
+    "expectedResult": "The cart total in the header should update to reflect the addition of the product, showing the correct item count and total price (e.g., '1 item(s) - $602.00').",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_cart_total_update.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Cart Total",
+      "UI"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_075",
+    "name": "Verify adding multiple quantities of the same product",
+    "description": "Verify that multiple quantities of the same product can be added to the cart.",
+    "steps": [
+      "Navigate to a product detail page.",
+      "Set the quantity to a value greater than 1 (e.g., 3).",
+      "Click on the 'Add to Cart' button.",
+      "Navigate to the shopping cart page.",
+      "Verify the quantity of the product in the cart."
+    ],
+    "expectedResult": "The product should be added to the cart with the specified quantity, and the cart total should reflect the correct price for the multiple items.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_multiple_quantities.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-008"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Add to Cart",
+      "Quantity",
+      "Shopping Cart"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_076",
+    "name": "Verify adding product to wish list from product listing",
+    "description": "Verify that users can add products to their wish list directly from product listings.",
+    "steps": [
+      "Navigate to the homepage or any category page with product listings.",
+      "Locate a product in the listing (e.g., one of the featured products).",
+      "Click on the 'Add to Wish List' button (heart icon) for the product.",
+      "Check the wish list count in the header."
+    ],
+    "expectedResult": "Product should be added to the wish list, a success message should be displayed, and the wish list count in the header should increment.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_wishlist_from_listing.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-009"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Wish List",
+      "Product Listing",
+      "Add to Wish List"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_077",
+    "name": "Verify wish list functionality for registered users versus guests",
+    "description": "Verify the behavior of wish list functionality for registered users versus guest users.",
+    "steps": [
+      "As a guest user, click on the 'Add to Wish List' button for a product.",
+      "Observe the system's response.",
+      "Log in as a registered user.",
+      "Click on the 'Add to Wish List' button for a product.",
+      "Navigate to the Wish List page by clicking on the wish list link in the header.",
+      "Verify the products in the wish list."
+    ],
+    "expectedResult": "For guest users: System should prompt to create an account or log in to use the wish list feature. For registered users: Product should be added to the wish list and be visible on the wish list page, with options to add to cart or remove.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_wishlist_user_types.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-009"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Wish List",
+      "User Authentication",
+      "Guest User",
+      "Registered User"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_078",
+    "name": "Verify adding product to comparison from product listing",
+    "description": "Verify that users can add products to comparison directly from product listings.",
+    "steps": [
+      "Navigate to the homepage or any category page with product listings.",
+      "Locate the 'Compare' button (comparison icon) for a product in the listing.",
+      "Click on the 'Compare' button.",
+      "Repeat for a second product.",
+      "Click on the product comparison link or navigate to the comparison page."
+    ],
+    "expectedResult": "Products should be added to comparison list, success messages should be displayed, and all added products should be visible on the comparison page with their specifications arranged in columns for easy comparison.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_add_to_comparison.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Product Comparison",
+      "Featured Products",
+      "UI"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_079",
+    "name": "Verify product comparison page functionality",
+    "description": "Verify that the product comparison page displays and functions correctly.",
+    "steps": [
+      "Add at least two products to the comparison list.",
+      "Navigate to the product comparison page.",
+      "Verify the display of product information (images, names, prices, specifications).",
+      "Verify the 'Add to Cart' buttons for each product.",
+      "Verify the 'Remove' buttons for each product.",
+      "Click on a 'Remove' button for one product.",
+      "Click on an 'Add to Cart' button for another product."
+    ],
+    "expectedResult": "The comparison page should display products in a table format with clear specification comparisons. Clicking 'Remove' should remove a product from comparison. Clicking 'Add to Cart' should add the product to the shopping cart.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_comparison_page_functionality.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-010"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Product Comparison",
+      "Comparison Page",
+      "UI",
+      "Functionality"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_080",
+    "name": "Verify display of regular and discounted prices",
+    "description": "Verify that products with discounts correctly display both original and discounted prices.",
+    "steps": [
+      "Navigate to the homepage or category page with product listings.",
+      "Locate products with discounted prices (e.g., 'Apple Cinema 30\"' showing $110.00 $122.00 or 'Canon EOS 5D' showing $98.00 $122.00).",
+      "Verify the display format of the original price (crossed out) and the discounted price.",
+      "Navigate to a product detail page for a discounted product.",
+      "Verify the price display on the detail page."
+    ],
+    "expectedResult": "For discounted products, the original price should be displayed crossed out (e.g., '$122.00') and the discounted price should be prominently displayed (e.g., '$98.00'). This format should be consistent in both product listings and product detail pages.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_discounted_price_display.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-011"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Price Display",
+      "Discount",
+      "UI"
+    ],
+    "priority": "High",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_081",
+    "name": "Verify display of tax information",
+    "description": "Verify that tax information is correctly displayed for product prices.",
+    "steps": [
+      "Navigate to the homepage or category page with product listings.",
+      "Observe the tax information displayed below the product prices (e.g., 'Ex Tax: $500.00').",
+      "Verify that all products display tax information consistently.",
+      "Navigate to a product detail page.",
+      "Verify the tax information display on the detail page."
+    ],
+    "expectedResult": "Tax information should be displayed below the product price in a consistent format (e.g., 'Ex Tax: $80.00') for all products in both listings and detail pages.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_tax_information_display.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-011"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Price Display",
+      "Tax Information",
+      "UI"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_082",
+    "name": "Verify brand logos display and navigation",
+    "description": "Verify that brand logos are displayed in the brand showcase area and that clicking on them navigates to the corresponding brand page.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "Scroll down to the brand showcase/carousel section at the bottom of the page.",
+      "Verify that multiple brand logos are displayed (e.g., brands like Harley Davidson, Dell, Disney, Coca Cola, Burger King).",
+      "Click on one of the brand logos."
+    ],
+    "expectedResult": "Brand logos should be clearly displayed in the showcase area. Clicking on a brand logo should navigate to a page showing all products from that brand or to a brand-specific landing page.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_brand_showcase.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-012"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Brand Showcase",
+      "Homepage",
+      "Navigation",
+      "UI"
+    ],
+    "priority": "Low",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_083",
+    "name": "Verify product carousel automatic rotation",
+    "description": "Verify that the product carousel on the homepage automatically rotates through slides.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "Observe the product carousel at the top of the page showing laptop images.",
+      "Note the currently displayed slide (indicated by the active dot at the bottom).",
+      "Wait for approximately 5-10 seconds without any interaction.",
+      "Observe if the carousel automatically transitions to the next slide."
+    ],
+    "expectedResult": "The product carousel should automatically rotate through slides after a set interval, with a smooth transition effect. The active indicator dot should update to reflect the current slide.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_carousel_auto_rotation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-013"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Carousel",
+      "Homepage",
+      "UI",
+      "Animation"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_084",
+    "name": "Verify product carousel manual navigation",
+    "description": "Verify that users can manually navigate through the product carousel using navigation controls.",
+    "steps": [
+      "Navigate to the OpenCart homepage.",
+      "Observe the product carousel at the top of the page showing laptop images.",
+      "Check for the presence of navigation controls (dots, arrows, or other indicators).",
+      "Click on a non-active navigation dot to jump to a specific slide.",
+      "If available, click on left/right arrows to move between slides."
+    ],
+    "expectedResult": "Users should be able to manually navigate the carousel using the navigation dots at the bottom to jump to specific slides. If arrow controls are present, they should allow sequential navigation between slides. All transitions should be smooth with proper visual feedback.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_carousel_manual_navigation.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-013"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Carousel",
+      "Navigation",
+      "User Interaction",
+      "Homepage"
+    ],
+    "priority": "Medium",
+    "estimatedDuration": 1
+  },
+  {
+    "id": "TC_085",
+    "name": "Verify responsive layout on mobile devices",
+    "description": "Verify that the website layout adapts properly to mobile device screen sizes.",
+    "steps": [
+      "Open the OpenCart website on a mobile device or using a mobile device emulator (e.g., iPhone SE, Samsung Galaxy S8).",
+      "Check the header layout including logo, search box, and cart information.",
+      "Verify the navigation menu collapses into a hamburger menu.",
+      "Navigate to a category page and check product listings arrangement.",
+      "Navigate to a product detail page and verify content readability and button sizes."
+    ],
+    "expectedResult": "The website should display properly on mobile screens with: header elements properly stacked, navigation menu collapsed into a hamburger menu, product listings in a single column, properly sized touch-friendly buttons, and all content readable without horizontal scrolling.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_mobile_responsiveness.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-014"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Responsive Design",
+      "Mobile",
+      "UI",
+      "Layout"
+    ],
+    "priority": "High",
+    "estimatedDuration": 2
+  },
+  {
+    "id": "TC_086",
+    "name": "Verify responsive checkout process",
+    "description": "Verify that the checkout process is usable and functions correctly on different screen sizes.",
+    "steps": [
+      "Add a product to cart on a desktop/laptop device.",
+      "Switch to a mobile device or emulator (or resize browser window to mobile dimensions).",
+      "Navigate to the checkout page.",
+      "Complete each step of the checkout process (personal details, shipping address, shipping method, payment method).",
+      "Verify form fields, buttons, and summary information display properly."
+    ],
+    "expectedResult": "The entire checkout process should be fully functional on mobile devices with: form fields properly sized for touch input, clear labels and error messages, easy navigation between checkout steps, readable order summary, and properly sized payment buttons.",
+    "status": "Not Run",
+    "automationStatus": "Automated",
+    "automationPath": "tests/TestOpenCart/test_responsive_checkout.py",
+    "lastExecuted": "",
+    "requirementIds": [
+      "REQ-014",
+      "REQ-005"
+    ],
+    "version": "v1.0",
+    "executedBy": "Pytest",
+    "tags": [
+      "Responsive Design",
+      "Checkout",
+      "Mobile",
+      "User Experience"
+    ],
+    "priority": "High",
+    "estimatedDuration": 3
+  }
+]
